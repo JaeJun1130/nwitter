@@ -3,13 +3,7 @@ import { BrowserRouter as Router, Switch, Redirect, Route } from "react-router-d
 import Auth from "../routes/Auth";
 import Home from "../routes/Home";
 
-const AppRouter = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const login = () => {
-        setIsLoggedIn(true);
-    };
-
-    useEffect(() => login(), []);
+const AppRouter = ({ isLoggedIn }) => {
     return (
         <Router>
             <Switch>
