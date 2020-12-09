@@ -14,11 +14,11 @@ const useSet = () => {
     } else if (name === "password") {
       setPassword(value);
     }
-    console.log(name, value);
+    console.log(value);
   };
 
   const onSubmit = (e) => {
-    e.prevnetDefault();
+    e.preventDefault();
   };
 
   return { email, password, onChange, onSubmit };
@@ -29,8 +29,8 @@ const AuthComponents = () => {
     <AuthPresenter
       email={email}
       password={password}
-      onChange={onChange}
-      onSubmit={onSubmit}
+      onChange={(e) => onChange(e)}
+      onSubmit={(e) => onSubmit(e)}
     />
   );
 };
