@@ -1,3 +1,3 @@
-import AuthComponents from "routes/Auth/AuthComponents";
+import AuthContainer from "routes/Auth/AuthContainer";
 
-export default AuthComponents;
+export default AuthContainer;

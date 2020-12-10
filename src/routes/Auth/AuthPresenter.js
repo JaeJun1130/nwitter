@@ -16,11 +16,18 @@ const LoginButton = styled.button``;
 
 const Form = styled.form``;
 
-const AuthPresenter = ({ email, password, onChange, onSubmit, newAccount }) => {
+const AuthPresenter = ({ email, password, onChange, onSubmit, newAccount, error, toggleAccount, onSocialClick }) => {
     return (
         <LoginContainer>
-            <Form onSubmit={onSubmit}>
-                <Login onChange={onChange} type="email" name="email" placeholder="Email" value={email} required></Login>
+            <Form onSubmit={(e) => onSubmit(e)}>
+                <Login
+                    onChange={(e) => onChange(e)}
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    required
+                ></Login>
                 <Login
                     onChange={onChange}
                     type="password"
@@ -30,10 +37,17 @@ const AuthPresenter = ({ email, password, onChange, onSubmit, newAccount }) => {
                     required
                 ></Login>
                 <Login type="submit" value={newAccount ? "회원가입" : "로그인"}></Login>
+                <span>{error}</span>
             </Form>
+            <span onClick={() => toggleAccount()}>{newAccount ? "로그인" : "회원가입"}</span>
+            {console.log(newAccount)}
             <LoginButtonContainer>
-                <LoginButton>Continue with Google</LoginButton>
-                <LoginButton>Continue with GitHub</LoginButton>
+                <LoginButton onClick={(e) => onSocialClick(e)} name="google">
+                    Continue with Google
+                </LoginButton>
+                <LoginButton onClick={(e) => onSocialClick(e)} name="github">
+                    Continue with GitHub
+                </LoginButton>
             </LoginButtonContainer>
         </LoginContainer>
     );
