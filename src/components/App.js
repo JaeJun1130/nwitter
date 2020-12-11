@@ -5,12 +5,14 @@ import { authService } from "fBase";
 function App() {
     const [init, setInit] = useState(false); // 로그인 상태이면 Home 화면으로 isLoggedIn true값 보내기
     const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인체크
+    const [userObj, setUserObj] = useState(null);
     useEffect(
         () =>
             authService.onAuthStateChanged((user) => {
                 // 해당유저가 로그인 상태인지
                 if (user) {
                     setIsLoggedIn(true);
+                    setUserObj(user);
                 } else {
                     setIsLoggedIn(false);
                 }
@@ -20,7 +22,7 @@ function App() {
     );
     return (
         <>
-            {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Loding"}
+            {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Loding"}
 
             <footer>&copy;{new Date().getFullYear()} Nwitter</footer>
         </>
