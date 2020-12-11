@@ -1,8 +1,8 @@
+import AuthPresenter from "routes/Auth/AuthPresenter";
 import { authService, firebaseInstance } from "fBase";
 import react, { useState, useEffect } from "react";
-import AuthPresenter from "routes/Auth/AuthPresenter";
 
-const useSet = () => {
+const AuthContainer = () => {
     const [email, setEmail] = useState(""); /*아이디*/
     const [password, setPassword] = useState(""); /*비번*/
     const [newAccount, setNewAcoount] = useState(true); /*회원가입 & 로그인*/
@@ -25,12 +25,11 @@ const useSet = () => {
             let data;
             if (newAccount) {
                 //계정 생성
-                const data = await authService.createUserWithEmailAndPassword(email, password); //로그인
+                await authService.createUserWithEmailAndPassword(email, password); //로그인
             } else {
                 //로그인
-                const data = await authService.signInWithEmailAndPassword(email, password);
+                await authService.signInWithEmailAndPassword(email, password);
             }
-            console.log(data);
         } catch (error) {
             console.log(error.message);
             setError(error.message);
@@ -56,10 +55,6 @@ const useSet = () => {
         console.log(data);
     };
 
-    return { email, password, onChange, onSubmit, newAccount, error, toggleAccount, onSocialClick };
-};
-const AuthContainer = () => {
-    const { email, password, onChange, onSubmit, newAccount, error, toggleAccount, onSocialClick } = useSet();
     return (
         <AuthPresenter
             email={email}
